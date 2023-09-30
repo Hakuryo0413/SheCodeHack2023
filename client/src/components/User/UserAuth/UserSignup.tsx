@@ -1,7 +1,14 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userRegisterValidationSchema } from "../../../utils/validation";
-import { SignupPayload } from "../../../types/PayloadInterface";
+import { SignupPayload, LoginPayload } from "../../../types/PayloadInterface";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../../features/axios/api/user/userAuthentication";
+import { useSelector} from "react-redux/es/exports";
+import { setToken } from "../../../features/redux/slices/user/tokenSlice";
+import { loginSuccess } from "../../../features/redux/slices/user/userLoginAuthSlice";
+import { RootState } from "../../../features/redux/reducers/Reducer";
 import { registerUser } from "../../../features/axios/api/user/userAuthentication";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +16,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function UserSignup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.userAuth.isLoggedIn
+  );
+  const token = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -16,7 +28,14 @@ export default function UserSignup() {
   } = useForm<SignupPayload>({
     resolver: yupResolver(userRegisterValidationSchema),
   });
-
+  useEffect(() => {
+    if (token) {
+      dispatch(loginSuccess());
+    }
+    if (isLoggedIn === true) {
+      navigate("/user/home");
+    }
+  }, [navigate]);
   const notify = (msg: string, type: string) =>
     type === "error"
       ? toast.error(msg, { position: toast.POSITION.BOTTOM_RIGHT })
@@ -26,9 +45,21 @@ export default function UserSignup() {
     registerUser(formData)
       .then((response: any) => {
         notify("User registered successfully", "success");
-
+        const loginPayLoad: LoginPayload = {
+          email: formData.email,
+          password: formData.password,
+        };
+        userLogin(loginPayLoad)
+          .then((response) => {
+            const token = response.token;
+            dispatch(setToken(token));
+            dispatch(loginSuccess());
+          })
+          .catch((error: any) => {
+            notify(error.message, "error");
+          });
         setTimeout(() => {
-          navigate("/user/login");
+          navigate("/user/profile");
         }, 2000);
       })
       .catch((error: any) => {
