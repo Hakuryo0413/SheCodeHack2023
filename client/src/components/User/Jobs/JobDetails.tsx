@@ -135,6 +135,54 @@ function JobDetails() {
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Trình độ học vấn
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.education}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Ngôn ngữ yêu cầu
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.language}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Thời gian làm việc
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.timetable}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Từng tham gia dự án
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.joined}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Phương thức làm việc
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.workplace}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Số năm kinh nghiệm tối thiểu
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {jobDetails?.experience}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
                     Yêu cầu công việc
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
