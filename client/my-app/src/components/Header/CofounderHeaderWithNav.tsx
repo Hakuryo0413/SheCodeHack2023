@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { clearEmployerToken } from "../../features/redux/slices/employer/employerTokenSlice";
-import { employerLogout } from "../../features/redux/slices/employer/employerDetailsSlice";
+import { clearCofounderToken } from "../../features/redux/slices/Cofounder/CofounderTokenSlice";
+import { CofounderLogout } from "../../features/redux/slices/Cofounder/CofounderDetailsSlice";
 import {
   Navbar,
   Typography,
@@ -20,7 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../features/redux/reducers/Reducer";
-import { fetchEmployer } from "../../features/redux/slices/employer/employerDetailsSlice";
+import { fetchCofounder } from "../../features/redux/slices/Cofounder/CofounderDetailsSlice";
 
 interface ProfileMenuItem {
   label: string;
@@ -46,19 +46,19 @@ function ProfileMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const employer = useSelector(
-    (state: RootState) => state.employerDetails.employerDetails
+  const Cofounder = useSelector(
+    (state: RootState) => state.CofounderDetails.CofounderDetails
   );
 
   const closeMenu = () => setIsMenuOpen(false);
   const handleLogout = () => {
-    dispatch(employerLogout());
-    dispatch(clearEmployerToken());
+    dispatch(CofounderLogout());
+    dispatch(clearCofounderToken());
     navigate("/");
   };
 
   useEffect(() => {
-    dispatch(fetchEmployer());
+    dispatch(fetchCofounder());
   }, [dispatch]);
 
   return (
@@ -74,7 +74,7 @@ function ProfileMenu() {
             size="sm"
             alt="candice wu"
             className="border border-blue-500 p-0.5"
-            src={employer?.employerData?.image ?? "../user.jpg"}
+            src={Cofounder?.CofounderData?.image ?? "../user.jpg"}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -123,7 +123,7 @@ function ProfileMenu() {
   );
 }
 
-export default function EmployerHeaderWithNav() {
+export default function CofounderHeaderWithNav() {
   return (
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:pl-6">
       <div className="relative mx-auto flex items-center text-blue-gray-900">

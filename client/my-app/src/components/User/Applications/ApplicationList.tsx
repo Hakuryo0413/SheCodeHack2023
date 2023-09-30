@@ -53,7 +53,7 @@ const ApplicationList: React.FC<AllprojectsProps> = ({
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
                   aria-hidden="true"
                 />
-                {applications?.employerId?.companyName}
+                {applications?.CofounderId?.companyName}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <MapPinIcon

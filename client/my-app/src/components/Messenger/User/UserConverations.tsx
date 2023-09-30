@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import configKeys from "../../../utils/config";
 import axios from "axios";
-import { EmployerRegisterPayload } from "../../../types/PayloadInterface";
+import { CofounderRegisterPayload } from "../../../types/PayloadInterface";
 
 function Conversations({ conversation, currentUser, onlineUsers }: any) {
-  const [employer, setEmployer] = useState<EmployerRegisterPayload>();
+  const [Cofounder, setCofounder] = useState<CofounderRegisterPayload>();
   const [isOnline, setIsOnline] = useState<boolean>(false);
 
   useEffect(() => {
@@ -15,9 +15,9 @@ function Conversations({ conversation, currentUser, onlineUsers }: any) {
     const getUser = async () => {
       try {
         const res = await axios(
-          `${configKeys.API_URL}employer/employer-data/${senderId}`
+          `${configKeys.API_URL}Cofounder/Cofounder-data/${senderId}`
         );
-        setEmployer(res?.data);
+        setCofounder(res?.data);
       } catch (error) {
         console.log(error);
       }
@@ -27,22 +27,22 @@ function Conversations({ conversation, currentUser, onlineUsers }: any) {
 
   useEffect(() => {
     const onlineUser = onlineUsers?.filter(
-      (f: any) => f.userId === employer?._id
+      (f: any) => f.userId === Cofounder?._id
     );
     if (onlineUser?.length > 0) {
       setIsOnline(true);
     }
-  }, [employer?._id, onlineUsers]);
+  }, [Cofounder?._id, onlineUsers]);
 
   return (
     <div className="flex items-center mt-5 p-3 cursor-pointer hover:bg-blue-gray-50 relative">
       <img
         className="mr-5 w-10 h-10 rounded-full object-cover"
-        src={employer?.image ?? "../user.jpg"}
+        src={Cofounder?.image ?? "../user.jpg"}
         alt=""
       />
       <div className="flex flex-col">
-        <span className="font-semibold">{employer?.companyName}</span>
+        <span className="font-semibold">{Cofounder?.companyName}</span>
         {isOnline ? (
           <span className="text-gray-500">online</span>
         ) : (

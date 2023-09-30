@@ -178,11 +178,11 @@ function projectDetails() {
                     <div className="flex items-center">
                       <div className="flex items-center mr-2">
                         <BriefcaseIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{projectDetails?.employer?.companyName}</span>
+                        <span>{projectDetails?.Cofounder?.companyName}</span>
                       </div>
                       <div className="flex items-center">
                         <LinkIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{projectDetails?.employer?.email}</span>
+                        <span>{projectDetails?.Cofounder?.email}</span>
                       </div>
                     </div>
                   </dd>
@@ -196,7 +196,7 @@ function projectDetails() {
                 onClick={() =>
                   projectApplyHandler(
                     projectDetails._id,
-                    projectDetails?.employer?._id
+                    projectDetails?.Cofounder?._id
                   )
                 }
               >
