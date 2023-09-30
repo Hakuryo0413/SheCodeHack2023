@@ -11,6 +11,7 @@ export interface CreateCoFounderInterface {
   image?: string;
 }
 
+
 export interface CoFounderInterface extends CreateCoFounderInterface {
   _id: Types.ObjectId;
 }
