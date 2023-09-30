@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../features/redux/reducers/Reducer";
-import ShimmerProjectDetails from "../../shimmer/ShimmerProjectDetails";
+import ShimmerJobDetails from "../../shimmer/ShimmerJobDetails";
 import {
-  fetchCofounderProjectDetails,
-  clearCofounderProjectDetails,
-  clearCofounderProjectId,
-} from "../../../features/redux/slices/Cofounder/CofounderProjectDetailsSlice";
+  fetchEmployerJobDetails,
+  clearEmployerJobDetails,
+  clearEmployerJobId,
+} from "../../../features/redux/slices/employer/employerJobDetailsSlice";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -15,34 +15,32 @@ import {
 } from "@heroicons/react/20/solid";
 import { Breadcrumbs } from "@material-tailwind/react";
 
-function CofounderViewProject() {
+function EmployerViewJob() {
   const dispatch = useDispatch();
-  const ProjectId: string =
-    useSelector(
-      (state: RootState) => state.CofounderProjectDetails.ProjectId
-    ) ?? "";
+  const jobId: string =
+    useSelector((state: RootState) => state.employerJobDetails.jobId) ?? "";
 
-  const ProjectDetails = useSelector(
-    (state: RootState) => state.CofounderProjectDetails.ProjectDetails
+  const jobDetails = useSelector(
+    (state: RootState) => state.employerJobDetails.jobDetails
   );
   const status = useSelector(
-    (state: RootState) => state.CofounderProjectDetails.status
+    (state: RootState) => state.employerJobDetails.status
   );
   const error = useSelector(
-    (state: RootState) => state.CofounderProjectDetails.error
+    (state: RootState) => state.employerJobDetails.error
   );
 
   useEffect(() => {
-    dispatch(fetchCofounderProjectDetails(ProjectId));
+    dispatch(fetchEmployerJobDetails(jobId));
 
     return () => {
-      dispatch(clearCofounderProjectDetails());
-      dispatch(clearCofounderProjectId());
+      dispatch(clearEmployerJobDetails());
+      dispatch(clearEmployerJobId());
     };
-  }, [dispatch, ProjectId]);
+  }, [dispatch, jobId]);
 
   if (status === "loading") {
-    return <ShimmerProjectDetails />;
+    return <ShimmerJobDetails />;
   }
 
   if (status === "failed") {
@@ -63,7 +61,7 @@ function CofounderViewProject() {
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
             </svg>
           </a>
-          <a href="/Cofounder/all-Projects" className="opacity-60">
+          <a href="/employer/all-jobs" className="opacity-60">
             <span>Dự án</span>
           </a>
           <a href="#">Chi tiết</a>
@@ -74,21 +72,19 @@ function CofounderViewProject() {
           <div className="flex items-center mb-2">
             <BriefcaseIcon className="w-6 h-6 mr-2 text-purple-500" />
             <div className="text-lg font-semibold text-gray-900">
-              {ProjectDetails?.title}
+              {jobDetails?.title}
             </div>
           </div>
           <div className="flex items-center mb-2 text-sm text-gray-600">
             <div className="flex items-center mr-4">
               <MapPinIcon className="w-4 h-4 mr-1 text-gray-600" />
-              <span>{ProjectDetails?.location}</span>
+              <span>{jobDetails?.location}</span>
             </div>
             <div className="flex items-center">
               <CalendarIcon className="w-4 h-4 mr-1 text-purple-600" />
               <span>
                 Đã đăng{" "}
-                {new Date(
-                  ProjectDetails?.createdAt ?? ""
-                )?.toLocaleDateString()}
+                {new Date(jobDetails?.createdAt ?? "")?.toLocaleDateString()}
               </span>
             </div>
           </div>
@@ -99,7 +95,7 @@ function CofounderViewProject() {
                   Chủ đề của dự án
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.topic}
+                  {jobDetails?.topic}
                 </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -107,7 +103,7 @@ function CofounderViewProject() {
                   Miêu tả dự án
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.description}
+                  {jobDetails?.description}
                 </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -115,7 +111,7 @@ function CofounderViewProject() {
                   Vị trí tuyển:
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.role}
+                  {jobDetails?.role}
                 </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -123,7 +119,7 @@ function CofounderViewProject() {
                   Địa chỉ
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.location}
+                  {jobDetails?.location}
                 </dd>
               </div>
               {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -131,7 +127,7 @@ function CofounderViewProject() {
                   Employment Type
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.employmentType}
+                  {jobDetails?.employmentType}
                 </dd>
               </div> */}
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -140,7 +136,7 @@ function CofounderViewProject() {
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <ul className="list-disc list-inside">
-                    {ProjectDetails?.requirements?.map((requirement, index) => (
+                    {jobDetails?.requirements?.map((requirement, index) => (
                       <li key={index}>{requirement}</li>
                     ))}
                   </ul>
@@ -152,7 +148,7 @@ function CofounderViewProject() {
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <ul className="list-disc list-inside">
-                    {ProjectDetails?.responsibilities?.map(
+                    {jobDetails?.responsibilities?.map(
                       (responsibility, index) => (
                         <li key={index}>{responsibility}</li>
                       )
@@ -163,7 +159,7 @@ function CofounderViewProject() {
                   Ghi chú
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.responsibilities}
+                  {jobDetails?.responsibilities}
                 </dd>
               </div>
               {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -173,7 +169,7 @@ function CofounderViewProject() {
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   <div className="flex items-center">
                     <CurrencyRupeeIcon className="w-4 h-4 mr-1 text-purple-600" />
-                    <span>{ProjectDetails?.salary}</span>
+                    <span>{jobDetails?.salary}</span>
                   </div>
                 </dd>
               </div> */}
@@ -182,7 +178,7 @@ function CofounderViewProject() {
                   Số lượng ứng tuyển
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {ProjectDetails?.openings}
+                  {jobDetails?.openings}
                 </dd>
               </div>
             </dl>
@@ -193,4 +189,4 @@ function CofounderViewProject() {
   );
 }
 
-export default CofounderViewProject;
+export default EmployerViewJob;

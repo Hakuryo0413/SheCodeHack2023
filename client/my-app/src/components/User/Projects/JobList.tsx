@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { projectsInterface } from "../../../types/projectInterface";
+import { JobsInterface } from "../../../types/JobInterface";
 import { useDispatch } from "react-redux";
-import { setprojectId } from "../../../features/redux/slices/user/projectDetailsSlice";
+import { setJobId } from "../../../features/redux/slices/user/jobDetailsSlice";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -12,8 +12,8 @@ import {
   MapPinIcon,
 } from "@heroicons/react/20/solid";
 
-interface AllprojectsProps {
-  projects: projectsInterface;
+interface AllJobsProps {
+  jobs: JobsInterface;
   selected: string;
   setSelected: Dispatch<SetStateAction<string>>;
 }
@@ -22,23 +22,19 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const projectList: React.FC<AllprojectsProps> = ({
-  projects,
-  selected,
-  setSelected,
-}) => {
+const JobList: React.FC<AllJobsProps> = ({ jobs, selected, setSelected }) => {
   const dispatch = useDispatch();
 
-  const handleViewproject = (projectId: string) => {
-    dispatch(setprojectId(projectId));
-    setSelected(projectId);
+  const handleViewJob = (jobId: string) => {
+    dispatch(setJobId(jobId));
+    setSelected(jobId);
   };
 
   return (
     <>
       <div
         className={`border border-gray-300 rounded-md p-4 mb-4 bg-white ${
-          selected === projects._id
+          selected === jobs._id
             ? "ring-2 ring-purple-500 transition-all duration-500"
             : ""
         }`}
@@ -46,37 +42,37 @@ const projectList: React.FC<AllprojectsProps> = ({
         <div className=" lg:flex lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
             <h2 className="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-xl sm:tracking-tight">
-              {projects.title}
+              {jobs.title}
             </h2>
             <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-              {/* Render project details */}
+              {/* Render job details */}
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
                   aria-hidden="true"
                 />
-                {projects.topic}
+                {jobs.topic}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
                   aria-hidden="true"
                 />
-                {projects.role}
+                {jobs.role}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <MapPinIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                {projects.location}
+                {jobs.location}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <CalendarIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                Đăng vào {new Date(projects.createdAt).toLocaleDateString()}
+                Đăng vào {new Date(jobs.createdAt).toLocaleDateString()}
               </div>
             </div>
           </div>
@@ -86,7 +82,7 @@ const projectList: React.FC<AllprojectsProps> = ({
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                onClick={() => handleViewproject(projects._id)}
+                onClick={() => handleViewJob(jobs._id)}
               >
                 <LinkIcon
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
@@ -150,4 +146,4 @@ const projectList: React.FC<AllprojectsProps> = ({
   );
 };
 
-export default projectList;
+export default JobList;

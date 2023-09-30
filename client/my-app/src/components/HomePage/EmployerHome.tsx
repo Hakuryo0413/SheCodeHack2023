@@ -3,22 +3,22 @@ import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/redux/reducers/Reducer";
 import {
-  fetchCofounder,
-  clearCofounderDetails,
-} from "../../features/redux/slices/Cofounder/CofounderDetailsSlice";
+  fetchEmployer,
+  clearEmployerDetails,
+} from "../../features/redux/slices/employer/employerDetailsSlice";
 
-function CofounderHome() {
+function EmployerHome() {
   const dispatch = useDispatch();
 
   const status = useSelector(
-    (state: RootState) => state.CofounderDetails.status
+    (state: RootState) => state.employerDetails.status
   );
-  const error = useSelector((state: RootState) => state.CofounderDetails.error);
+  const error = useSelector((state: RootState) => state.employerDetails.error);
 
   useEffect(() => {
-    dispatch(fetchCofounder());
+    dispatch(fetchEmployer());
     return () => {
-      dispatch(clearCofounderDetails());
+      dispatch(clearEmployerDetails());
     };
   }, [dispatch]);
 
@@ -37,4 +37,4 @@ function CofounderHome() {
   );
 }
 
-export default CofounderHome;
+export default EmployerHome;

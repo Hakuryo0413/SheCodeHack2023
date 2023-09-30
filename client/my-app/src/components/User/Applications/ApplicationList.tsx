@@ -10,7 +10,7 @@ import {
   MapPinIcon,
 } from "@heroicons/react/20/solid";
 
-interface AllprojectsProps {
+interface AllJobsProps {
   applications: any;
   selected: string;
   setSelected: Dispatch<SetStateAction<string>>;
@@ -20,14 +20,14 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ApplicationList: React.FC<AllprojectsProps> = ({
+const ApplicationList: React.FC<AllJobsProps> = ({
   applications,
   selected,
   setSelected,
 }) => {
   const dispatch = useDispatch();
 
-  const handleViewproject = (applicationId: string) => {
+  const handleViewJob = (applicationId: string) => {
     dispatch(setApplicationId(applicationId));
     setSelected(applicationId);
   };
@@ -44,23 +44,23 @@ const ApplicationList: React.FC<AllprojectsProps> = ({
         <div className=" lg:flex lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
             <h2 className="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-xl sm:tracking-tight">
-              {applications?.projectId?.title}
+              {applications?.jobId?.title}
             </h2>
             <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-              {/* Render project details */}
+              {/* Render job details */}
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
                   aria-hidden="true"
                 />
-                {applications?.CofounderId?.companyName}
+                {applications?.employerId?.companyName}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <MapPinIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                {applications?.projectId?.location}
+                {applications?.jobId?.location}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <CalendarIcon
@@ -78,7 +78,7 @@ const ApplicationList: React.FC<AllprojectsProps> = ({
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                onClick={() => handleViewproject(applications._id)}
+                onClick={() => handleViewJob(applications._id)}
               >
                 <LinkIcon
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
@@ -115,7 +115,7 @@ const ApplicationList: React.FC<AllprojectsProps> = ({
                           "block px-4 py-2 text-sm text-black"
                         )}
                       >
-                        Sửa
+                        Edit
                       </a>
                     )}
                   </Menu.Item>
@@ -128,7 +128,7 @@ const ApplicationList: React.FC<AllprojectsProps> = ({
                           "block px-4 py-2 text-sm text-black"
                         )}
                       >
-                        Xem
+                        View
                       </a>
                     )}
                   </Menu.Item>

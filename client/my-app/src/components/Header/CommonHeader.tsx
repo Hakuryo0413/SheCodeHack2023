@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Nhà sáng lập", href: "coFounderer/login", current: false },
+  { name: "Nhà sáng lập", href: "employer/login", current: false },
   { name: "Đăng ký", href: "user/register", current: false },
   { name: "Đăng nhập", href: "user/login", current: false },
 ];
@@ -28,13 +28,13 @@ function CommonHeader() {
                     <img
                       className="block h-14 w-auto lg:hidden"
                       src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                      alt="My Company"
+                      alt="Your Company"
                     />
                     <Link to={"/"}>
                       <img
                         className="hidden h-14 w-auto lg:block"
                         src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                        alt="My Company"
+                        alt="Your Company"
                       />
                     </Link>
                   </div>

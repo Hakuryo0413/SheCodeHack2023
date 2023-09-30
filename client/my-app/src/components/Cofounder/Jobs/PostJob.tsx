@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { jobCreationValidationSchema } from "../../../utils/validation";
 import { JobCreationPayload } from "../../../types/PayloadInterface";
-import createNewJob from "../../../features/axios/api/Cofounder/createJob";
+import createNewJob from "../../../features/axios/api/employer/createJob";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 function PostJob() {
@@ -27,7 +27,7 @@ function PostJob() {
       .then((response) => {
         notify("Job created successfully", "success");
         setTimeout(() => {
-          navigate("/Cofounder/all-jobs");
+          navigate("/employer/all-jobs");
         }, 2000);
       })
       .catch((error: any) => {
@@ -48,7 +48,7 @@ function PostJob() {
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
             </svg>
           </a>
-          <a href="/Cofounder/all-jobs" className="opacity-60">
+          <a href="/employer/all-jobs" className="opacity-60">
             <span>Dự án</span>
           </a>
           <a href="#">Tạo dự án mới</a>

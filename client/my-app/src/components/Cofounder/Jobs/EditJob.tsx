@@ -6,8 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { jobUpdateValidationSchema } from "../../../utils/validation";
 import { JobCreationPayload } from "../../../types/PayloadInterface";
 import { useNavigate, useParams } from "react-router-dom";
-import updateJob from "../../../features/axios/api/Cofounder/updateJob";
-import { jobDetailsCofounder } from "../../../features/axios/api/Cofounder/jobDetailsCofounder";
+import updateJob from "../../../features/axios/api/employer/updateJob";
+import { jobDetailsEmployer } from "../../../features/axios/api/employer/jobDetailsEmployer";
 import { JobsInterface } from "../../../types/JobInterface";
 import { Breadcrumbs } from "@material-tailwind/react";
 
@@ -17,7 +17,7 @@ function EditJob() {
   const { id } = useParams();
   useEffect(() => {
     async function details() {
-      const data = await jobDetailsCofounder(id ?? "");
+      const data = await jobDetailsEmployer(id ?? "");
       setJobData(data);
     }
     details();
@@ -59,7 +59,7 @@ function EditJob() {
       .then((response) => {
         notify("Job updated successfully", "success");
         setTimeout(() => {
-          navigate("/Cofounder/all-jobs");
+          navigate("/employer/all-jobs");
         }, 2000);
       })
       .catch((error: any) => {

@@ -19,7 +19,7 @@ import {
   // LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
-import { CofounderLogout } from "../../features/redux/slices/Cofounder/CofounderDetailsSlice";
+import { employerLogout } from "../../features/redux/slices/employer/employerDetailsSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -58,7 +58,7 @@ function ProfileMenu() {
 
   const closeMenu = () => setIsMenuOpen(false);
   const handleLogout = () => {
-    dispatch(CofounderLogout());
+    dispatch(employerLogout());
     navigate("/");
   };
   return (
@@ -123,7 +123,7 @@ function ProfileMenu() {
   );
 }
 
-function CofounderHeader() {
+function EmployerHeader() {
   return (
     <nav className="block w-full rounded-xl shadow-md backdrop-saturate-200 backdrop-blur-2xl border border-white/80 text-white mx-auto max-w-screen-xl p-2 lg:pl-6 bg-background">
       <div className="relative mx-auto flex items-center text-blue-gray-900 bg-background">
@@ -142,7 +142,7 @@ function CofounderHeader() {
   );
 }
 
-export default CofounderHeader;
-function clearCofounderToken(): any {
+export default EmployerHeader;
+function clearEmployerToken(): any {
   throw new Error("Function not implemented.");
 }

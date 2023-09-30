@@ -1,7 +1,7 @@
 import React from "react";
 import { Shimmer } from "react-shimmer";
 
-function UserSideProjectListingShimmer() {
+function UserSideJobListingShimmer() {
   return (
     <div className="w-full p-4 sm:p-6">
       <div className="flex w-full flex-wrap">
@@ -23,4 +23,4 @@ function UserSideProjectListingShimmer() {
   );
 }
 
-export default UserSideProjectListingShimmer;
+export default UserSideJobListingShimmer;

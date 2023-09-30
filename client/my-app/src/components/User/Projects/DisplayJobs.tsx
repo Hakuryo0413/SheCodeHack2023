@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllprojects } from "../../../features/redux/slices/user/getAllprojectsSlice";
+import { fetchAllJobs } from "../../../features/redux/slices/user/getAllJobsSlice";
 import { RootState } from "../../../features/redux/reducers/Reducer";
-import { projectsInterface } from "../../../types/projectInterface";
+import { JobsInterface } from "../../../types/JobInterface";
 import { Navbar, Button, Input } from "@material-tailwind/react";
-import projectList from "./projectList";
-import projectDetails from "./projectDetails";
-import UserSideprojectListingShimmer from "../../shimmer/UserSideprojectListingShimmer";
-import { isApplied } from "../../../features/axios/api/user/applyForproject";
+import JobList from "./JobList";
+import JobDetails from "./JobDetails";
+import UserSideJobListingShimmer from "../../shimmer/UserSideJobListingShimmer";
+import { isApplied } from "../../../features/axios/api/user/applyForJob";
 import {
   distinct,
-  filterprojects,
-} from "../../../features/axios/api/user/projectDetails";
+  filterJobs,
+} from "../../../features/axios/api/user/jobDetails";
 
-function Displayprojects(this: any) {
+function DisplayJobs(this: any) {
   const dispatch = useDispatch();
-  const projects = useSelector(
-    (state: RootState) => state.allprojects.projects
-  );
-  const status = useSelector((state: RootState) => state.allprojects.status);
-  const error = useSelector((state: RootState) => state.allprojects.error);
+  const jobs = useSelector((state: RootState) => state.allJobs.jobs);
+  const status = useSelector((state: RootState) => state.allJobs.status);
+  const error = useSelector((state: RootState) => state.allJobs.error);
   const user = useSelector((state: RootState) => state.userDetails.userDetails);
 
-  const [projectsList, setprojectsList] = useState<any>([]);
-  // variable for project selection ring
+  const [jobsList, setJobsList] = useState<any>([]);
+  // variable for job selection ring
   const [selected, setSelected] = useState("");
   // variables for search searching
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,7 +59,7 @@ function Displayprojects(this: any) {
   }, [prevScrollPos]);
 
   useEffect(() => {
-    dispatch(fetchAllprojects());
+    dispatch(fetchAllJobs());
   }, [dispatch]);
 
   useEffect(() => {
@@ -71,62 +69,62 @@ function Displayprojects(this: any) {
   }, []);
 
   useEffect(() => {
-    let filterproject = projects?.filter(
-      (project: projectsInterface) =>
-        project?.topic?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
-        project?.location?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
-        project?.role?.toLowerCase().includes(searchQuery?.toLowerCase())
+    let filterJob = jobs?.filter(
+      (job: JobsInterface) =>
+        job?.topic?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+        job?.location?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+        job?.role?.toLowerCase().includes(searchQuery?.toLowerCase())
     );
-    setprojectsList(filterproject);
-  }, [projects, searchQuery]);
+    setJobsList(filterJob);
+  }, [jobs, searchQuery]);
 
   const handleFilter = async () => {
-    const filteredprojects = await filterprojects(
+    const filteredJobs = await filterJobs(
       selectedTopic,
       //selectedWorkingTime,
       selectedRole,
       selectedLocation
       //selectedSalary
     );
-    setFiltered(filteredprojects);
+    setFiltered(filteredJobs);
     setIsFiltered(true);
   };
 
-  // for filtering out the applied projects
+  // for filtering out the applied jobs
   useEffect(() => {
-    const fetchFilteredprojects = async () => {
-      let filteredprojects = [];
+    const fetchFilteredJobs = async () => {
+      let filteredJobs = [];
       if (isFiltered) {
-        filteredprojects = await Promise.all(
-          (filtered ?? [])?.map(async (project: projectsInterface) => {
-            const projectStatus = await isApplied(project?._id, user?._id);
-            if (projectStatus?.status !== "Applied") {
-              return project;
+        filteredJobs = await Promise.all(
+          (filtered ?? [])?.map(async (job: JobsInterface) => {
+            const jobStatus = await isApplied(job?._id, user?._id);
+            if (jobStatus?.status !== "Applied") {
+              return job;
             }
             return null;
           })
         );
       } else {
-        filteredprojects = await Promise.all(
-          (projectsList ?? [])?.map(async (project: projectsInterface) => {
-            const projectStatus = await isApplied(project?._id, user?._id);
-            if (projectStatus?.status !== "Applied") {
-              return project;
+        filteredJobs = await Promise.all(
+          (jobsList ?? [])?.map(async (job: JobsInterface) => {
+            const jobStatus = await isApplied(job?._id, user?._id);
+            if (jobStatus?.status !== "Applied") {
+              return job;
             }
             return null;
           })
         );
       }
-      setFiltered(filteredprojects?.filter(Boolean));
+      setFiltered(filteredJobs?.filter(Boolean));
     };
 
-    fetchFilteredprojects();
-  }, [projects]);
+    fetchFilteredJobs();
+  }, [jobs]);
 
   if (status === "loading") {
     return (
       <div className="p-20">
-        <UserSideprojectListingShimmer />
+        <UserSideJobListingShimmer />
       </div>
     );
   }
@@ -219,18 +217,18 @@ function Displayprojects(this: any) {
             style={{ maxHeight: "calc(100vh - 80px)" }}
           >
             {isFiltered
-              ? filtered.map((project: projectsInterface) => (
-                  <projectList
-                    key={project._id}
-                    projects={project}
+              ? filtered.map((job: JobsInterface) => (
+                  <JobList
+                    key={job._id}
+                    jobs={job}
                     selected={selected}
                     setSelected={setSelected}
                   />
                 ))
-              : projectsList?.map((project: projectsInterface) => (
-                  <projectList
-                    key={project._id}
-                    projects={project}
+              : jobsList?.map((job: JobsInterface) => (
+                  <JobList
+                    key={job._id}
+                    jobs={job}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -242,7 +240,7 @@ function Displayprojects(this: any) {
             className="overflow-y-auto"
             style={{ maxHeight: "calc(100vh - 80px)" }}
           >
-            <projectDetails />
+            <JobDetails />
           </div>
         </div>
       </div>
@@ -250,4 +248,4 @@ function Displayprojects(this: any) {
   );
 }
 
-export default Displayprojects;
+export default DisplayJobs;

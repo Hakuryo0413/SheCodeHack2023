@@ -12,9 +12,7 @@ import {
   clearUserDetails,
 } from "../../features/redux/slices/user/userDetailsSlice";
 
-const navigation = [
-  { name: "Dự án", href: "/project/all-projects", current: false },
-];
+const navigation = [{ name: "Dự án", href: "/job/all-jobs", current: false }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -62,13 +60,13 @@ function UserHeader() {
                     <img
                       className="block h-14 w-auto lg:hidden"
                       src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                      alt="My Company"
+                      alt="Your Company"
                     />
                     <Link to={"/user/home"}>
                       <img
                         className="hidden h-14 w-auto lg:block"
                         src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                        alt="My Company"
+                        alt="Your Company"
                       />
                     </Link>
                   </div>
@@ -140,7 +138,7 @@ function UserHeader() {
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to={"/project/all-projects"}>
+                          <Link to={"/job/all-jobs"}>
                             <button
                               className={classNames(
                                 "block px-4 py-2 text-sm text-purple-700"
@@ -162,7 +160,7 @@ function UserHeader() {
                           </Link>
                         </Menu.Item> */}
                         <Menu.Item>
-                          <Link to={"/Cofounder/login"}>
+                          <Link to={"/employer/login"}>
                             <button
                               className={classNames(
                                 "block px-4 py-2 text-sm text-purple-700"

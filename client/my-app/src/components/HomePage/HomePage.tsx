@@ -7,11 +7,13 @@ import { loginSuccess } from "../../features/redux/slices/user/userLoginAuthSlic
 
 const links = [
   { name: "Phù hợp cho tất cả giai đoạn phát triển", href: "#" },
+  // { name: "Come with or without an idea", href: "#" },
   { name: "Dự án đa dạng", href: "#" },
   { name: "Tự mình khám phá và trải nghiệm", href: "#" },
 ];
 const stats = [
   { name: "Dự án", value: "1000+" },
+  // { name: "Full-time Part-time etc", value: "Different jobs" },
   { name: "Nhà sáng lập", value: "100+" },
   { name: "Miễn phí", value: "Không giới hạn" },
 ];

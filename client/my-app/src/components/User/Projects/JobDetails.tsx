@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../features/redux/reducers/Reducer";
-import ShimmerprojectDetails from "../../shimmer/ShimmerprojectDetails";
-import { applyForproject } from "../../../features/axios/api/user/applyForproject";
-import { isApplied } from "../../../features/axios/api/user/applyForproject";
+import ShimmerJobDetails from "../../shimmer/ShimmerJobDetails";
+import { applyForJob } from "../../../features/axios/api/user/applyForJob";
+import { isApplied } from "../../../features/axios/api/user/applyForJob";
 import { userData } from "../../../features/axios/api/user/userDetails";
 import { UserDataPayload } from "../../../types/PayloadInterface";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import {
-  fetchprojectDetails,
-  clearprojectDetails,
-  clearprojectId,
-} from "../../../features/redux/slices/user/projectDetailsSlice";
+  fetchJobDetails,
+  clearJObDetails,
+  clearJObId,
+} from "../../../features/redux/slices/user/jobDetailsSlice";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -21,25 +21,25 @@ import {
   MapPinIcon,
 } from "@heroicons/react/20/solid";
 
-function projectDetails() {
+function JobDetails() {
   const dispatch = useDispatch();
-  const projectId: string =
-    useSelector((state: RootState) => state.projectDetails.projectId) ?? "";
-  const projectDetails = useSelector(
-    (state: RootState) => state.projectDetails.projectDetails
+  const jobId: string =
+    useSelector((state: RootState) => state.jobDetails.jobId) ?? "";
+  const jobDetails = useSelector(
+    (state: RootState) => state.jobDetails.jobDetails
   );
 
   const [applied, setApplied] = useState("Apply");
   const [user, setUser] = useState<UserDataPayload>();
 
   useEffect(() => {
-    dispatch(fetchprojectDetails(projectId));
+    dispatch(fetchJobDetails(jobId));
 
     return () => {
-      dispatch(clearprojectDetails());
-      dispatch(clearprojectId());
+      dispatch(clearJObDetails());
+      dispatch(clearJObId());
     };
-  }, [dispatch, projectId]);
+  }, [dispatch, jobId]);
 
   useEffect(() => {
     async function userInfo() {
@@ -51,11 +51,11 @@ function projectDetails() {
 
   useEffect(() => {
     async function applied() {
-      const status = await isApplied(projectDetails?._id, user?._id);
+      const status = await isApplied(jobDetails?._id, user?._id);
       setApplied(status?.status);
     }
     applied();
-  }, [projectDetails?._id, user?._id]);
+  }, [jobDetails?._id, user?._id]);
 
   const notify = (msg: string, type: string) => {
     type === "error"
@@ -63,10 +63,10 @@ function projectDetails() {
       : toast.success(msg, { position: toast.POSITION.TOP_RIGHT });
   };
 
-  const projectApplyHandler = async (projectID: string, empID: string) => {
-    await applyForproject(projectID, empID)
+  const jobApplyHandler = async (jobID: string, empID: string) => {
+    await applyForJob(jobID, empID)
       .then((application) => {
-        notify("project applied successfully", "success");
+        notify("Job applied successfully", "success");
         setApplied("Applied");
       })
       .catch((error: any) => {
@@ -76,25 +76,25 @@ function projectDetails() {
 
   return (
     <div className={`max-w-md mx-auto transition-opacity duration-500`}>
-      {projectDetails ? (
+      {jobDetails ? (
         <div className="max-w-md mx-auto">
           <div className="p-4 rounded-lg">
             <div className="flex items-center mb-2">
               <BriefcaseIcon className="w-6 h-6 mr-2 text-purple-500" />
               <div className="text-lg font-semibold text-gray-900">
-                {projectDetails?.title}
+                {jobDetails?.title}
               </div>
             </div>
             <div className="flex items-center mb-2 text-sm text-gray-600">
               <div className="flex items-center mr-4">
                 <MapPinIcon className="w-4 h-4 mr-1 text-gray-600" />
-                <span>{projectDetails?.location}</span>
+                <span>{jobDetails?.location}</span>
               </div>
               <div className="flex items-center">
                 <CalendarIcon className="w-4 h-4 mr-1 text-purple-600" />
                 <span>
                   Đăng vào{" "}
-                  {new Date(projectDetails?.createdAt).toLocaleDateString()}
+                  {new Date(jobDetails?.createdAt).toLocaleDateString()}
                 </span>
               </div>
             </div>
@@ -106,7 +106,7 @@ function projectDetails() {
                     Chủ đề của dự án
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.topic}
+                    {jobDetails?.topic}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -114,7 +114,7 @@ function projectDetails() {
                     Chủ đề của dự án
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.topic}
+                    {jobDetails?.topic}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -122,7 +122,7 @@ function projectDetails() {
                     Mô tả dự án
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.description}
+                    {jobDetails?.description}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -130,7 +130,7 @@ function projectDetails() {
                     Địa điểm
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.location}
+                    {jobDetails?.location}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -138,7 +138,7 @@ function projectDetails() {
                     Vị trí tuyển
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.role}
+                    {jobDetails?.role}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -147,7 +147,7 @@ function projectDetails() {
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     <ul className="list-disc list-inside">
-                      {projectDetails.requirements.map((requirement, index) => (
+                      {jobDetails.requirements.map((requirement, index) => (
                         <li key={index}>{requirement}</li>
                       ))}
                     </ul>
@@ -158,7 +158,7 @@ function projectDetails() {
                     Ghi chú{" "}
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails?.responsibilities}
+                    {jobDetails?.responsibilities}
                   </dd>
                 </div>
 
@@ -167,7 +167,7 @@ function projectDetails() {
                     Số lượng ứng tuyển
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {projectDetails.openings}
+                    {jobDetails.openings}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -178,11 +178,11 @@ function projectDetails() {
                     <div className="flex items-center">
                       <div className="flex items-center mr-2">
                         <BriefcaseIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{projectDetails?.Cofounder?.companyName}</span>
+                        <span>{jobDetails?.employer?.companyName}</span>
                       </div>
                       <div className="flex items-center">
                         <LinkIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{projectDetails?.Cofounder?.email}</span>
+                        <span>{jobDetails?.employer?.email}</span>
                       </div>
                     </div>
                   </dd>
@@ -194,10 +194,7 @@ function projectDetails() {
                 className="px-4 py-2 text-sm font-medium text-white bg-purple-700 rounded hover:bg-purple-500"
                 disabled={applied === "Applied"}
                 onClick={() =>
-                  projectApplyHandler(
-                    projectDetails._id,
-                    projectDetails?.Cofounder?._id
-                  )
+                  jobApplyHandler(jobDetails._id, jobDetails?.employer?._id)
                 }
               >
                 {applied}
@@ -206,11 +203,11 @@ function projectDetails() {
           </div>
         </div>
       ) : (
-        <ShimmerprojectDetails />
+        <ShimmerJobDetails />
       )}
       <ToastContainer />
     </div>
   );
 }
 
-export default projectDetails;
+export default JobDetails;

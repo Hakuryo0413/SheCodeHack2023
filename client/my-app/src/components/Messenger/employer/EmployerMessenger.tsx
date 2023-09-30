@@ -20,7 +20,7 @@ function Message({ message, own, id }: MessageType) {
           setUser(res?.data);
         } else {
           const res = await axios(
-            `${configKeys.API_URL}Cofounder/Cofounder-data/${id}`
+            `${configKeys.API_URL}employer/employer-data/${id}`
           );
           setUser(res?.data);
         }
