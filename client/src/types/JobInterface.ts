@@ -8,6 +8,12 @@ export interface JobsInterface {
   responsibilities: string[];
   topic: string;
   role: string;
+  education: string;
+  joined: string;
+  workplace: string;
+  language: string;
+  timetable: string;
+  experience: number;
   // salary?: number;
   openings: number;
   cofounder: any;

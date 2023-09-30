@@ -62,6 +62,12 @@ export interface JobCreationPayload {
   role: string;
   requirements: Array<string>;
   responsibilities: Array<string>;
+  education: string;
+  experience: number;
+  joined: string;
+  language: string;
+  timetable: string;
+  workplace: string;
   // salary: number;
   openings: number;
   cofounderId: string;

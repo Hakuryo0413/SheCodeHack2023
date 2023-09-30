@@ -38,8 +38,16 @@ function EditJob() {
       setValue("employmentType", jobData?.employmentType);
       setValue("description", jobData?.description);
       setValue("location", jobData?.location);
+      setValue("language", jobData?.language);
+      setValue("joined", jobData?.joined);
+
+      setValue("workplace", jobData?.workplace);
+      setValue("timetable", jobData?.timetable);
+
       setValue("requirements", [jobData?.requirements?.join("\n")]);
       setValue("responsibilities", [jobData?.responsibilities.join("\n")]);
+      setValue("experience", jobData?.experience ?? 0);
+
       // setValue("salary", jobData?.salary ?? 0);
       setValue("openings", jobData?.openings ?? 0);
       setValue("topic", jobData?.topic);
@@ -145,37 +153,37 @@ function EditJob() {
                 {errors.topic && (
                   <p className="text-red-500 text-sm">{errors.topic.message}</p>
                 )}
-                <option value="Nông nghiệp">Nông nghiệp</option>
+                <option value="Chọn chủ đề">Chọn chủ đề</option>
                 <option value="Môi trường">Môi trường</option>
-                <option value="Du lịch">Du lịch</option>
-                <option value="Sản xuất công nghiệp">
-                  Sản xuất công nghiệp
-                </option>
-                <option value="Cơ khí chế tạo">Cơ khí chế tạo</option>
-                <option value="Y tế, chăm sóc sức khoẻ">
-                  Y tế, chăm sóc sức khỏe
-                </option>
-                <option value="Thương mại, dịch vụ">Thương mại, dịch vụ</option>
-                <option value="Giáo dục">Giáo dục</option>
-                <option value="Tài chính">Tài chính</option>
+                <option value="Kinh tế">Kinh tế</option>
+                <option value="Y tế">Y tế</option>
+                <option value="Công nghệ">Công nghệ</option>
               </select>
             </div>
 
             <div className="mb-4">
               <label
-                htmlFor="location"
+                htmlFor="location" //sửa db
                 className="block text-sm mb-1 font-medium text-gray-400"
               >
-                Địa chỉ:
+                Địa điểm{" "}
               </label>
-              <input
-                type="text"
+              <select
                 id="location"
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
                 required
-                placeholder="Location"
+                placeholder="Địa điểm"
                 {...register("location")}
-              />
+              >
+                {errors.location && (
+                  <p className="text-red-500 text-sm">
+                    {errors.location.message}
+                  </p>
+                )}
+                <option value="Chọn địa điểm">Chọn địa điểm</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+              </select>
             </div>
 
             <div className="mb-4">
@@ -195,18 +203,137 @@ function EditJob() {
                 {errors.role && (
                   <p className="text-red-500 text-sm">{errors.role.message}</p>
                 )}
-                <option value="Developer">Kĩ sư lập trình</option>
-                <option value="Designer">Thiết kế</option>
-                <option value="Product Manager">Quản lý sản phẩm</option>
-                <option value="Sale">Bán hàng</option>
-                <option value="Sales Manager">Quản lý bán hàng</option>
+                <option value="Kỹ sư kỹ thuật">Kỹ sư kỹ thuật</option>
+                <option value="Thiết kế">Thiết kế</option>
                 <option value="Marketing">Marketing</option>
-                <option value="Chief Marketing">Trưởng Marketing</option>
-                <option value="Event planer">Tổ chức sự kiện</option>
-                <option value="Operation Manager">Quản lý hệ thống</option>
-                <option value="Business Development Manager">
-                  Quản lý kinh doanh phát triển
-                </option>
+                <option value="Manager">Manager</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="joined" //sửa db
+                className="block text-sm mb-1 font-medium text-gray-400"
+              >
+                Đã từng tham gia dự án ?
+              </label>
+              <select
+                id="joined"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                required
+                placeholder="joined"
+                {...register("joined")}
+              >
+                {errors.role && (
+                  <p className="text-red-500 text-sm">{errors.role.message}</p>
+                )}
+                <option value="Chọn">Chọn tham gia</option>
+                <option value="Yes">Đã từng</option>
+                <option value="No">Chưa từng</option>
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="role" //sửa db
+                className="block text-sm mb-1 font-medium text-gray-400"
+              >
+                Bạn muốn tuyển thành viên có trình độ như thế nào?
+              </label>
+              <select
+                id="education"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                required
+                placeholder="education"
+                {...register("education")}
+              >
+                {errors.role && (
+                  <p className="text-red-500 text-sm">{errors.role.message}</p>
+                )}
+                <option value="Đại học">Đại học</option>
+                <option value="Thạc sỹ">Thạc sỹ</option>
+                <option value="Tiến sỹ">Tiên sỹ</option>
+                <option value="Giáo sư">Giáo sư</option>
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="role" //sửa db
+                className="block text-sm mb-1 font-medium text-gray-400"
+              >
+                Yêu cầu biết ngôn ngữ
+              </label>
+              <select
+                id="language"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                required
+                placeholder="language"
+                {...register("language")}
+              >
+                {errors.language && (
+                  <p className="text-red-500 text-sm">
+                    {errors.language.message}
+                  </p>
+                )}
+                <option value="Chọn ngôn ngữ">Chọn ngôn ngữ</option>
+                <option value="Anh">Anh</option>
+                <option value="Việt">Việt</option>
+                <option value="Trung">Trung</option>
+                <option value="Nhật">Nhật</option>
+                <option value="Khác">Khác</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="role" //sửa db
+                className="block text-sm mb-1 font-medium text-gray-400"
+              >
+                Thời gian làm việc
+              </label>
+              <select
+                id="timetable"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                required
+                placeholder="timetable"
+                {...register("timetable")}
+              >
+                {errors.timetable && (
+                  <p className="text-red-500 text-sm">
+                    {errors.timetable.message}
+                  </p>
+                )}
+                <option value="Chọn thời gian">Chọn thời gian</option>
+                <option value="Sáng">Sáng</option>
+                <option value="Trưa">Trưa</option>
+                <option value="Chiều">Chiều</option>
+                <option value="Tối">Tối</option>
+                <option value="Cả ngày">Cả ngày</option>
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="workplace" //sửa db
+                className="block text-sm mb-1 font-medium text-gray-400"
+              >
+                Phương thức làm việc
+              </label>
+              <select
+                id="workplace"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                required
+                placeholder="workplace"
+                {...register("workplace")}
+              >
+                {errors.workplace && (
+                  <p className="text-red-500 text-sm">
+                    {errors.workplace.message}
+                  </p>
+                )}
+                <option value="Chọn">Chọn phương thức</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                <option value="Cả hai">Cả hai</option>
               </select>
             </div>
             <div className="mb-4">
@@ -265,10 +392,26 @@ function EditJob() {
               </div> */}
               <div>
                 <label
+                  htmlFor="experience"
+                  className="block text-sm mb-1 font-medium text-gray-400"
+                >
+                  Số năm kinh nghiệm yêu cầu:
+                </label>
+                <input
+                  type="number"
+                  id="experience"
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600"
+                  required
+                  placeholder="Số năm kinh nghiệm"
+                  {...register("experience")}
+                />
+              </div>
+              <div>
+                <label
                   htmlFor="openings"
                   className="block text-sm mb-1 font-medium text-gray-400"
                 >
-                  số lượng ứng tuyển:
+                  Số lượng ứng tuyển:
                 </label>
                 <input
                   type="number"

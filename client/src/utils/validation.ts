@@ -60,6 +60,7 @@ export const jobUpdateValidationSchema = yup.object().shape({
   title: yup.string().required("Yêu cầu tên dự án"),
   topic: yup.string().required("Yêu cầu chủ đề"),
   role: yup.string().required("Yêu cầu vai trò"),
+  education: yup.string().required("Yêu cầu trình độ"),
 
   description: yup.string().required("Yêu cầu mô tả dự án"),
   location: yup.string().required("Yêu cầu địa chỉ"),
@@ -113,9 +114,17 @@ export const jobCreationValidationSchema = yup.object().shape({
   title: yup.string().required("Yêu cầu tên dự án"),
   topic: yup.string().required("Yêu cầu chủ đề"),
   role: yup.string().required("Yêu cầu vai trò"),
+  joined: yup.string().required("Yêu cầu tham gia"),
+  education: yup.string().required("Yêu cầu trình độ"),
+  workplace: yup.string().required("Yêu cầu phương thức"),
 
   description: yup.string().required("Yêu cầu mô tả dự án"),
   location: yup.string().required("Yêu cầu địa chỉ"),
+  language: yup.string().required("Yêu cầu ngôn ngữ"),
+  // experience: yup.string().required("Yêu cầu kinh nghiệm"),
+
+  timetable: yup.string().required("Yêu cầu thời gian"),
+
   // employmentType: yup.string().required("Employment Type is required"),
   requirements: yup
     .mixed()
@@ -160,4 +169,9 @@ export const jobCreationValidationSchema = yup.object().shape({
     .required("Openings is required")
     .integer("Openings must be an integer")
     .positive("Openings must be a positive number"),
+  experience: yup
+    .number()
+    .required("Experience is required")
+    .integer("Experience must be an integer")
+    .positive("Experience must be a positive number"),
 });

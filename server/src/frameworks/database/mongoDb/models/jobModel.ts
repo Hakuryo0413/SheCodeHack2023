@@ -17,6 +17,30 @@ const jobSchema = new Schema({
     type: String,
     required: [false, "please give the employment type"],
   },
+  education: {
+    type: String,
+    required: [true, "please give the education"],
+  },
+  timetable: {
+    type: String,
+    required: [true, "please give the timetable"],
+  },
+  language: {
+    type: String,
+    required: [true, "please give the language"],
+  },
+  experience: {
+    type: Number,
+    required: [true, "please give the experience"],
+  },
+  joined: {
+    type: String,
+    required: [true, "please give the joined"],
+  },
+  workplace: {
+    type: String,
+    required: [true, "please give the workplace"],
+  },
   topic: {
     type: String,
     require: [true, "please give the topic"],

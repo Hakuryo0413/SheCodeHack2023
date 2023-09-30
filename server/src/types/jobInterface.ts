@@ -8,6 +8,12 @@ export interface JobInterface {
   responsibilities?: string[];
   topic?: string;
   role?: string;
+  education?: string;
+  workplace?: string;
+  language?: string;
+  timetable?: string;
+  experience?: number;
+  joined?: string;
   note?: string;
   openings?: number;
   cofounder?: Types.ObjectId;
