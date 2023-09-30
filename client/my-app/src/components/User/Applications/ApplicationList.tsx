@@ -115,7 +115,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({
                           "block px-4 py-2 text-sm text-black"
                         )}
                       >
-                        Sửa
+                        Edit
                       </a>
                     )}
                   </Menu.Item>
@@ -128,7 +128,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({
                           "block px-4 py-2 text-sm text-black"
                         )}
                       >
-                        Xem
+                        View
                       </a>
                     )}
                   </Menu.Item>

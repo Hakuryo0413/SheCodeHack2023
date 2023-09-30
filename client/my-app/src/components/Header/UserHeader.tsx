@@ -60,13 +60,13 @@ function UserHeader() {
                     <img
                       className="block h-14 w-auto lg:hidden"
                       src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                      alt="My Company"
+                      alt="Your Company"
                     />
                     <Link to={"/user/home"}>
                       <img
                         className="hidden h-14 w-auto lg:block"
                         src="https://res.cloudinary.com/dde8ngtcq/image/upload/v1695356446/iu7lh1c5dxivfoekjjwj.png"
-                        alt="My Company"
+                        alt="Your Company"
                       />
                     </Link>
                   </div>
