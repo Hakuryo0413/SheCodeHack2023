@@ -33,7 +33,7 @@ const jobSchema = new Schema({
     type: Array,
     required: true,
   },
-  note:{
+  note: {
     type: String,
     require: false,
   },
@@ -45,10 +45,10 @@ const jobSchema = new Schema({
     type: Number,
     required: [true, "please add the number of openings"],
   },
-  employer: {
+  cofounder: {
     type: Schema.Types.ObjectId,
-    ref: "Employer",
-    required: [true, "please add employerId"],
+    ref: "Cofounder",
+    required: [true, "please add cofounderId"],
   },
   createdAt: {
     type: Date,

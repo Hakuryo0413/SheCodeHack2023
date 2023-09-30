@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import {format} from 'timeago.js';
-import configKeys from '../../../utils/config';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { format } from "timeago.js";
+import configKeys from "../../../utils/config";
 
 type MessageType = {
   message: any;
@@ -9,7 +9,7 @@ type MessageType = {
   id: string;
 };
 
-function Message({ message, own , id}: MessageType) {
+function Message({ message, own, id }: MessageType) {
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
@@ -19,8 +19,10 @@ function Message({ message, own , id}: MessageType) {
           const res = await axios(`${configKeys.API_URL}user/user-data/${id}`);
           setUser(res?.data);
         } else {
-          const res = await axios(`${configKeys.API_URL}employer/employer-data/${id}`);
-          setUser(res?.data)
+          const res = await axios(
+            `${configKeys.API_URL}cofounder/cofounder-data/${id}`
+          );
+          setUser(res?.data);
         }
       } catch (error) {
         console.log(error);
@@ -33,12 +35,13 @@ function Message({ message, own , id}: MessageType) {
       <div className="flex">
         <img
           className="mr-2 w-8 h-8 rounded-full object-cover"
-          src= {user?.image ?? '../user.jpg'}
+          src={user?.image ?? "../user.jpg"}
           alt=""
         />
         <p
           className={`p-3 rounded-3xl max-w-xs ${
-            own ? "bg-gray-300 text-black" : "bg-purple-600 text-white"}`}
+            own ? "bg-gray-300 text-black" : "bg-purple-600 text-white"
+          }`}
         >
           {message?.text}
         </p>

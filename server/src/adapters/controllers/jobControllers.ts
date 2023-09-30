@@ -12,7 +12,7 @@ import {
   createJob,
   updateJob,
   deleteJob,
-  findJobByEmployer,
+  findJobByCofounder,
   getAllJobs,
   findJobById,
   distinctTitleLocationSalary,
@@ -30,8 +30,8 @@ const jobController = (
     async (req: Request, res: Response) => {
       const customReq = req as CustomRequest;
       const job: JobInterface = req.body;
-      const employerId = new Types.ObjectId(customReq.payload);
-      job.employer = employerId;
+      const cofounderId = new Types.ObjectId(customReq.payload);
+      job.cofounder = cofounderId;
       const createdJob = await createJob(job, dbRepositoryJob);
 
       if (!createdJob) {
@@ -88,11 +88,11 @@ const jobController = (
     }
   );
 
-  const getJobsByEmployer = expressAsyncHandler(
+  const getJobsByCofounder = expressAsyncHandler(
     async (req: Request, res: Response) => {
       const customReq = req as CustomRequest;
-      const employerId = customReq.payload ?? "";
-      const jobs = await findJobByEmployer(employerId, dbRepositoryJob);
+      const cofounderId = customReq.payload ?? "";
+      const jobs = await findJobByCofounder(cofounderId, dbRepositoryJob);
       res.json({ status: "success", jobs });
     }
   );
@@ -134,8 +134,8 @@ const jobController = (
 
   const filterJobs = expressAsyncHandler(
     async (req: Request, res: Response) => {
-      const { role, location,topic } = req.body;
-      const jobs = await filterTheJobs(role, location, topic , dbRepositoryJob);
+      const { role, location, topic } = req.body;
+      const jobs = await filterTheJobs(role, location, topic, dbRepositoryJob);
 
       res.json({
         status: "success",
@@ -148,7 +148,7 @@ const jobController = (
     createNewJob,
     updateTheJob,
     deleteTheJob,
-    getJobsByEmployer,
+    getJobsByCofounder,
     findAllJobs,
     jobDataById,
     titleLocationSalary,

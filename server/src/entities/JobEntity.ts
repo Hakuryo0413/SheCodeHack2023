@@ -32,8 +32,8 @@ export class JobEntity {
     await this.model.findByIdAndDelete(jobId);
   }
 
-  public async getJobByEmployer(employerId: string): Promise<JobInterface[]> {
-    const jobs = await this.model.find({ employer: employerId });
+  public async getJobByCofounder(cofounderId: string): Promise<JobInterface[]> {
+    const jobs = await this.model.find({ cofounder: cofounderId });
     return jobs;
   }
 
@@ -45,7 +45,7 @@ export class JobEntity {
   public async getJobById(Id: string): Promise<JobInterface | null> {
     const jobData = await this.model
       .findById(Id)
-      .populate("employer", "companyName email")
+      .populate("cofounder", "companyName email")
       .exec();
     return jobData;
   }
@@ -55,7 +55,11 @@ export class JobEntity {
     return distinctValues;
   }
 
-  public async filterJob(topic:string ,role: string, location: string): Promise<any> {
+  public async filterJob(
+    topic: string,
+    role: string,
+    location: string
+  ): Promise<any> {
     const filter: any = {};
 
     if (topic) {

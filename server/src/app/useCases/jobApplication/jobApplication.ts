@@ -32,12 +32,12 @@ export const existingApplication = (
 };
 
 export const allApplications = (
-  employerId: string,
+  cofounderId: string,
   jobApplicationDbRepository: ReturnType<JobApplicationDbInterface>
 ) => {
   try {
     const applications =
-      jobApplicationDbRepository.jobApplicationsForEmployer(employerId);
+      jobApplicationDbRepository.jobApplicationsForCofounder(cofounderId);
     return applications;
   } catch (error: any) {
     throw new Error(`failed to get applications ${error.message}`);
@@ -75,7 +75,8 @@ export const userJobApplications = (
   jobApplicationDbRepository: ReturnType<JobApplicationDbInterface>
 ) => {
   try {
-    const userApplications =jobApplicationDbRepository.userApplications(userId);
+    const userApplications =
+      jobApplicationDbRepository.userApplications(userId);
     return userApplications;
   } catch (error: any) {
     throw new Error(`failed to get the user applications ${error.message}`);

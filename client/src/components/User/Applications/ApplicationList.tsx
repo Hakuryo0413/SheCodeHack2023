@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setApplicationId } from "../../../features/redux/slices/user/userApplicationDetailsSlice";
 import {
   BriefcaseIcon,
@@ -20,7 +20,11 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ApplicationList: React.FC<AllJobsProps> = ({ applications, selected, setSelected }) => {
+const ApplicationList: React.FC<AllJobsProps> = ({
+  applications,
+  selected,
+  setSelected,
+}) => {
   const dispatch = useDispatch();
 
   const handleViewJob = (applicationId: string) => {
@@ -32,7 +36,9 @@ const ApplicationList: React.FC<AllJobsProps> = ({ applications, selected, setSe
     <>
       <div
         className={`border border-gray-300 rounded-md p-4 mb-4 bg-white ${
-          selected === applications._id ? "ring-2 ring-purple-500 transition-all duration-500" : ""
+          selected === applications._id
+            ? "ring-2 ring-purple-500 transition-all duration-500"
+            : ""
         }`}
       >
         <div className=" lg:flex lg:items-center lg:justify-between">
@@ -47,7 +53,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({ applications, selected, setSe
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
                   aria-hidden="true"
                 />
-                {applications?.employerId?.companyName}
+                {applications?.cofounderId?.companyName}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <MapPinIcon
@@ -61,7 +67,8 @@ const ApplicationList: React.FC<AllJobsProps> = ({ applications, selected, setSe
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                Applied on {new Date(applications.createdAt).toLocaleDateString()}
+                Applied on{" "}
+                {new Date(applications.createdAt).toLocaleDateString()}
               </div>
             </div>
           </div>

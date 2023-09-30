@@ -10,7 +10,7 @@ export interface JobsInterface {
   role: string;
   // salary?: number;
   openings: number;
-  employer: any;
+  cofounder: any;
   createdAt: Date;
   appliedUsers?: Array<string>;
 

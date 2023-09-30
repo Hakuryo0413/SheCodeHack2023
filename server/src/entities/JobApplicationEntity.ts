@@ -2,7 +2,7 @@ import { JobApplicationInterface } from "../types/jobApplicationInterface";
 import { JobApplicationModel } from "../frameworks/database/mongoDb/models/jobApplicationModel";
 import { User } from "../frameworks/database/mongoDb/models/userModel";
 import { Job } from "../frameworks/database/mongoDb/models/jobModel";
-import { Employer } from "../frameworks/database/mongoDb/models/employerModel";
+import { Cofounder } from "../frameworks/database/mongoDb/models/cofounderModel";
 import { Types } from "mongoose";
 
 export class JobApplicationEntity {
@@ -36,9 +36,11 @@ export class JobApplicationEntity {
     }
   }
 
-  public async getAllApplicationsForEmployer(employerId: string): Promise<any> {
+  public async getAllApplicationsForCofounder(
+    cofounderId: string
+  ): Promise<any> {
     const applications = await this.model
-      .find({ employerId })
+      .find({ cofounderId })
       .populate({ path: "userId", select: "name email image", model: User })
       .populate({ path: "jobId", select: "title", model: Job });
 
@@ -55,7 +57,11 @@ export class JobApplicationEntity {
         model: User,
       })
       .populate({ path: "jobId", select: "title location", model: Job })
-      .populate({ path: "employerId", select: "companyName", model: Employer });
+      .populate({
+        path: "cofounderId",
+        select: "companyName",
+        model: Cofounder,
+      });
     return details;
   }
 
@@ -81,9 +87,9 @@ export class JobApplicationEntity {
         model: Job,
       })
       .populate({
-        path: "employerId",
+        path: "cofounderId",
         select: "companyName",
-        model: Employer,
+        model: Cofounder,
       });
 
     return userApplications;

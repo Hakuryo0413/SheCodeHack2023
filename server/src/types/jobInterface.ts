@@ -10,8 +10,7 @@ export interface JobInterface {
   role?: string;
   note?: string;
   openings?: number;
-  employer?: Types.ObjectId;
+  cofounder?: Types.ObjectId;
   createdAt?: Date;
   appliedUsers?: Array<string>;
-  
 }

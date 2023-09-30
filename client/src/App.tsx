@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import UserRouter from "./routes/user/UserRouter";
-import EmployerRouter from "./routes/employer/EmployerRouter";
+import CofounderRouter from "./routes/cofounder/CofounderRouter";
 import NotFound from "./components/Error/NotFound";
 import HomeRouter from "./routes/home/HomeRouter";
 import JobRouter from "./routes/jobs/JobRouter";
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<HomeRouter />} />
           <Route path="/user/*" element={<UserRouter />} />
-          <Route path="/employer/*" element={<EmployerRouter />} />
+          <Route path="/cofounder/*" element={<CofounderRouter />} />
           <Route path="/job/*" element={<JobRouter />} />
           <Route path="/application/*" element={<ApplicationRouter />} />
           <Route path="/messenger/*" element={<MessengerRouter />} />

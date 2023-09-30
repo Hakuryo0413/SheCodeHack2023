@@ -6,49 +6,59 @@ import { HttpStatus } from "../../../../types/httpStatus";
 import { Types } from "mongoose";
 
 export const JobApplicationRepositoryMongoDB = (model: JobApplicationModel) => {
-    const jobApplicationEntity = new JobApplicationEntity(model)
+  const jobApplicationEntity = new JobApplicationEntity(model);
 
-    const applyForJob = async (application: JobApplicationInterface) => {
-        const newApplication = await jobApplicationEntity.applyForJob(application);
-        if(newApplication === null){
-            throw new AppError('already applied', HttpStatus.CONFLICT);
-        }
-        return newApplication;
+  const applyForJob = async (application: JobApplicationInterface) => {
+    const newApplication = await jobApplicationEntity.applyForJob(application);
+    if (newApplication === null) {
+      throw new AppError("already applied", HttpStatus.CONFLICT);
     }
+    return newApplication;
+  };
 
-    const alreadyApplied = async (jobId: string, userId: string) => {
-        const alreadyExists = await jobApplicationEntity.isApplied(jobId, userId);
-        return alreadyExists;
-    }
+  const alreadyApplied = async (jobId: string, userId: string) => {
+    const alreadyExists = await jobApplicationEntity.isApplied(jobId, userId);
+    return alreadyExists;
+  };
 
-    const jobApplicationForEmployer = async (employerId: string) => {
-        const jobApplications = await jobApplicationEntity.getAllApplicationsForEmployer(employerId);
-        return jobApplications;
-    }
+  const jobApplicationForCofounder = async (cofounderId: string) => {
+    const jobApplications =
+      await jobApplicationEntity.getAllApplicationsForCofounder(cofounderId);
+    return jobApplications;
+  };
 
-    const jobApplicationDetails = async (jobId: Types.ObjectId) => {
-        const applicationDetails = await jobApplicationEntity.getApplicationDetails(jobId);
-        return applicationDetails;
-    }
+  const jobApplicationDetails = async (jobId: Types.ObjectId) => {
+    const applicationDetails = await jobApplicationEntity.getApplicationDetails(
+      jobId
+    );
+    return applicationDetails;
+  };
 
-    const changeApplicationStatus = async (jobId: Types.ObjectId, status: string) => {
-        const updatedApplication = await jobApplicationEntity.changeStatusOfApplication(jobId, status);
-        return jobApplicationDetails;
-    }
+  const changeApplicationStatus = async (
+    jobId: Types.ObjectId,
+    status: string
+  ) => {
+    const updatedApplication =
+      await jobApplicationEntity.changeStatusOfApplication(jobId, status);
+    return jobApplicationDetails;
+  };
 
-    const userApplications = async (userId: Types.ObjectId) => {
-        const jobApplications = await jobApplicationEntity.getAllApplicationByUser(userId);
-        return jobApplications;
-    }
+  const userApplications = async (userId: Types.ObjectId) => {
+    const jobApplications = await jobApplicationEntity.getAllApplicationByUser(
+      userId
+    );
+    return jobApplications;
+  };
 
-    return {
-        applyForJob,
-        alreadyApplied,
-        jobApplicationForEmployer,
-        jobApplicationDetails,
-        changeApplicationStatus,
-        userApplications
-    }
-}
+  return {
+    applyForJob,
+    alreadyApplied,
+    jobApplicationForCofounder,
+    jobApplicationDetails,
+    changeApplicationStatus,
+    userApplications,
+  };
+};
 
-export type JobApplicationRepositoryMongoDB = typeof JobApplicationRepositoryMongoDB;
+export type JobApplicationRepositoryMongoDB =
+  typeof JobApplicationRepositoryMongoDB;

@@ -40,12 +40,12 @@ export const deleteJob = async (
   }
 };
 
-export const findJobByEmployer = async (
-  employerId: string,
+export const findJobByCofounder = async (
+  cofounderId: string,
   jobRepository: ReturnType<JobDbInterface>
 ) => {
   try {
-    const jobs = await jobRepository.findJobByEmployer(employerId);
+    const jobs = await jobRepository.findJobByCofounder(cofounderId);
     return jobs;
   } catch (error) {
     throw new Error("failed to find the jobs");
@@ -96,7 +96,7 @@ export const filterTheJobs = async (
   jobRepository: ReturnType<JobDbInterface>
 ) => {
   try {
-    const jobs = await jobRepository.filterJob(role, location,topic);
+    const jobs = await jobRepository.filterJob(role, location, topic);
     return jobs;
   } catch (error) {
     throw new AppError("could not find any results", HttpStatus.NOT_FOUND);

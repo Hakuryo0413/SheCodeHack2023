@@ -19,8 +19,8 @@ export const JobRepositoryMongoDB = (model: JobModel) => {
     await jobEntity.deleteJob(jobId);
   };
 
-  const findJobByEmployer = async (employerId: string) => {
-    const jobs = await jobEntity.getJobByEmployer(employerId);
+  const findJobByCofounder = async (cofounderId: string) => {
+    const jobs = await jobEntity.getJobByCofounder(cofounderId);
     return jobs;
   };
 
@@ -39,8 +39,8 @@ export const JobRepositoryMongoDB = (model: JobModel) => {
     return distinct;
   };
 
-  const filterJobs = async (role: string, location: string,topic:string) => {
-    const jobs = await jobEntity.filterJob(role,location,topic);
+  const filterJobs = async (role: string, location: string, topic: string) => {
+    const jobs = await jobEntity.filterJob(role, location, topic);
     return jobs;
   };
 
@@ -48,7 +48,7 @@ export const JobRepositoryMongoDB = (model: JobModel) => {
     createJob,
     updateJob,
     deleteJob,
-    findJobByEmployer,
+    findJobByCofounder,
     findAllJobs,
     findJobById,
     titlePlaceSalary,

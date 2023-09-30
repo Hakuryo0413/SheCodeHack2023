@@ -9,7 +9,7 @@ export interface SignupPayload extends LoginPayload {
   confirmPassword: string;
 }
 
-export interface EmployerRegisterPayload extends LoginPayload {
+export interface CofounderRegisterPayload extends LoginPayload {
   email: string;
   _id: string;
   companyName: string;
@@ -64,6 +64,6 @@ export interface JobCreationPayload {
   responsibilities: Array<string>;
   // salary: number;
   openings: number;
-  employerId: string;
+  cofounderId: string;
   note: string;
 }

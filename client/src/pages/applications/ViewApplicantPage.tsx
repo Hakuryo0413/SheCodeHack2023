@@ -1,14 +1,14 @@
-import React from 'react'
-import ViewApplicant from '../../components/Employer/Applications/ViewApplicant';
-import EmployerHeader from '../../components/Header/EmployerHeader';
+import React from "react";
+import ViewApplicant from "../../components/Cofounder/Applications/ViewApplicant";
+import CofounderHeader from "../../components/Header/CofounderHeader";
 
 function ViewApplicantPage() {
   return (
-    <div className=''>
-        <EmployerHeader/>
-        <ViewApplicant/>
+    <div className="">
+      <CofounderHeader />
+      <ViewApplicant />
     </div>
-  )
+  );
 }
 
-export default ViewApplicantPage
+export default ViewApplicantPage;

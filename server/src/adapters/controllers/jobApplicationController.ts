@@ -14,7 +14,7 @@ import {
   allApplications,
   getApplicationDetails,
   changeApplicationStatus,
-  userJobApplications
+  userJobApplications,
 } from "../../app/useCases/jobApplication/jobApplication";
 
 const jobApplicationController = (
@@ -32,7 +32,7 @@ const jobApplicationController = (
       const jobId = Array.isArray(req.query.jobId)
         ? req.query.jobId[0]
         : req.query.jobId;
-      const employerId = Array.isArray(req.query.empId)
+      const cofounderId = Array.isArray(req.query.empId)
         ? req.query.empId[0]
         : req.query.empId;
 
@@ -40,7 +40,7 @@ const jobApplicationController = (
 
       const userId = new Types.ObjectId(customReq.payload);
       application.jobId = new Types.ObjectId(String(jobId));
-      application.employerId = new Types.ObjectId(String(employerId));
+      application.cofounderId = new Types.ObjectId(String(cofounderId));
       application.userId = userId;
 
       const applyForNewJob = await applyForJob(
@@ -90,12 +90,12 @@ const jobApplicationController = (
     }
   );
 
-  const jobApplicationForEmployer = expressAsyncHandler(
+  const jobApplicationForCofounder = expressAsyncHandler(
     async (req: Request, res: Response) => {
       const customReq = req as CustomRequest;
-      const employerId = customReq.payload;
+      const cofounderId = customReq.payload;
       const jobApplications = await allApplications(
-        employerId ?? "",
+        cofounderId ?? "",
         dbRepositoryJobApplication
       );
       res.json({
@@ -136,14 +136,17 @@ const jobApplicationController = (
         dbRepositoryJobApplication
       );
 
-      if(!updatedApplication) {
-        throw new AppError('error while updating the status', HttpStatus.INTERNAL_SERVER_ERROR);
+      if (!updatedApplication) {
+        throw new AppError(
+          "error while updating the status",
+          HttpStatus.INTERNAL_SERVER_ERROR
+        );
       }
 
       res.json({
-        status: 'success',
-        updatedData: updatedApplication
-      })
+        status: "success",
+        updatedData: updatedApplication,
+      });
     }
   );
 
@@ -151,27 +154,29 @@ const jobApplicationController = (
     async (req: Request, res: Response) => {
       const customReq = req as CustomRequest;
       const userId = new Types.ObjectId(customReq.payload);
-      const jobApplications = await userJobApplications(userId, dbRepositoryJobApplication);
+      const jobApplications = await userJobApplications(
+        userId,
+        dbRepositoryJobApplication
+      );
 
       if (!jobApplications) {
-        throw new Error('user job applications not found');
+        throw new Error("user job applications not found");
       }
 
       res.json({
-        status: 'success',
-        jobApplications
-      })
-
+        status: "success",
+        jobApplications,
+      });
     }
-  )
+  );
 
   return {
     applyNewJob,
     existingApplicant,
-    jobApplicationForEmployer,
+    jobApplicationForCofounder,
     jobApplicationDetails,
     changeTheApplicationStatus,
-    userApplications 
+    userApplications,
   };
 };
 

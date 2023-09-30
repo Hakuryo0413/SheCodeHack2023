@@ -36,7 +36,7 @@ export const userLoginValidationSchema = yup.object().shape({
     .min(6, "Mật khẩu cần có ít nhất 6 kí tự"),
 });
 
-export const employerRegisterValidationSchema = yup.object().shape({
+export const cofounderRegisterValidationSchema = yup.object().shape({
   companyName: yup
     .string()
     .required("Yêu cầu nhập tên")

@@ -18,8 +18,8 @@ export const jobDbRepository = (
     await repository.deleteJob(jobId);
   };
 
-  const findJobByEmployer = async (employerId: string) => {
-    const jobs = await repository.findJobByEmployer(employerId);
+  const findJobByCofounder = async (cofounderId: string) => {
+    const jobs = await repository.findJobByCofounder(cofounderId);
     return jobs;
   };
 
@@ -47,7 +47,7 @@ export const jobDbRepository = (
     createJob,
     updateJob,
     deleteJob,
-    findJobByEmployer,
+    findJobByCofounder,
     findAllJobs,
     getJobById,
     titleLocationSalary,

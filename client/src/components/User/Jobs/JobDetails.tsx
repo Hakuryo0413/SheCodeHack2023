@@ -178,11 +178,11 @@ function JobDetails() {
                     <div className="flex items-center">
                       <div className="flex items-center mr-2">
                         <BriefcaseIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{jobDetails?.employer?.companyName}</span>
+                        <span>{jobDetails?.cofounder?.companyName}</span>
                       </div>
                       <div className="flex items-center">
                         <LinkIcon className="w-4 h-4 mr-1 text-purple-600" />
-                        <span>{jobDetails?.employer?.email}</span>
+                        <span>{jobDetails?.cofounder?.email}</span>
                       </div>
                     </div>
                   </dd>
@@ -194,7 +194,7 @@ function JobDetails() {
                 className="px-4 py-2 text-sm font-medium text-white bg-purple-700 rounded hover:bg-purple-500"
                 disabled={applied === "Applied"}
                 onClick={() =>
-                  jobApplyHandler(jobDetails._id, jobDetails?.employer?._id)
+                  jobApplyHandler(jobDetails._id, jobDetails?.cofounder?._id)
                 }
               >
                 {applied}
