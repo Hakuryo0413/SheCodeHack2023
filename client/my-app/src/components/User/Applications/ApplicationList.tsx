@@ -10,7 +10,7 @@ import {
   MapPinIcon,
 } from "@heroicons/react/20/solid";
 
-interface AllJobsProps {
+interface AllprojectsProps {
   applications: any;
   selected: string;
   setSelected: Dispatch<SetStateAction<string>>;
@@ -20,14 +20,14 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ApplicationList: React.FC<AllJobsProps> = ({
+const ApplicationList: React.FC<AllprojectsProps> = ({
   applications,
   selected,
   setSelected,
 }) => {
   const dispatch = useDispatch();
 
-  const handleViewJob = (applicationId: string) => {
+  const handleViewproject = (applicationId: string) => {
     dispatch(setApplicationId(applicationId));
     setSelected(applicationId);
   };
@@ -44,10 +44,10 @@ const ApplicationList: React.FC<AllJobsProps> = ({
         <div className=" lg:flex lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
             <h2 className="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-xl sm:tracking-tight">
-              {applications?.jobId?.title}
+              {applications?.projectId?.title}
             </h2>
             <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-              {/* Render job details */}
+              {/* Render project details */}
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-600"
@@ -60,7 +60,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                {applications?.jobId?.location}
+                {applications?.projectId?.location}
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <CalendarIcon
@@ -78,7 +78,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                onClick={() => handleViewJob(applications._id)}
+                onClick={() => handleViewproject(applications._id)}
               >
                 <LinkIcon
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"

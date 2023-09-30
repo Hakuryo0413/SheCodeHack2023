@@ -12,7 +12,9 @@ import {
   clearUserDetails,
 } from "../../features/redux/slices/user/userDetailsSlice";
 
-const navigation = [{ name: "Dự án", href: "/job/all-jobs", current: false }];
+const navigation = [
+  { name: "Dự án", href: "/project/all-projects", current: false },
+];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -138,7 +140,7 @@ function UserHeader() {
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to={"/job/all-jobs"}>
+                          <Link to={"/project/all-projects"}>
                             <button
                               className={classNames(
                                 "block px-4 py-2 text-sm text-purple-700"

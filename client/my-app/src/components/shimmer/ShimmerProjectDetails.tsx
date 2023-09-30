@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShimmerJobDetails: React.FC = () => {
+const ShimmerProjectDetails: React.FC = () => {
   return (
     <div className="p-4 max-w-md mx-auto">
       <div className="p-4 rounded-lg bg-gray-100 animate-pulse">
@@ -28,4 +28,4 @@ const ShimmerJobDetails: React.FC = () => {
   );
 };
 
-export default ShimmerJobDetails;
+export default ShimmerProjectDetails;
