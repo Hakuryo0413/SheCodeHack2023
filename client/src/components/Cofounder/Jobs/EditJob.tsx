@@ -59,7 +59,7 @@ function EditJob() {
       .then((response) => {
         notify("Job updated successfully", "success");
         setTimeout(() => {
-          navigate("/employer/all-jobs");
+          navigate("/cofounder/all-jobs");
         }, 2000);
       })
       .catch((error: any) => {

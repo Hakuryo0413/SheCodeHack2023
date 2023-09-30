@@ -145,10 +145,10 @@ function ViewApplicant() {
                 </MenuItem>
                 <MenuItem
                   onClick={() =>
-                    handleStatusChange("Ưu tiên", applicationData?._id ?? "")
+                    handleStatusChange("Đang chờ", applicationData?._id ?? "")
                   }
                 >
-                  Ưu tiên
+                  Đang chờ
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -208,7 +208,7 @@ function ViewApplicant() {
                         ? "Đồng ý"
                         : applicationData?.applicationStatus === "Từ chối"
                         ? "Từ chối"
-                        : "Ưu tiên"
+                        : "Đang chờ"
                     }
                     color={
                       applicationData?.applicationStatus === "Đồng ý"

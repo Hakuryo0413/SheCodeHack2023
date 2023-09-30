@@ -67,8 +67,7 @@ const ApplicationList: React.FC<AllJobsProps> = ({
                   className="mr-1.5 h-5 w-5 flex-shrink-0 text-purple-400"
                   aria-hidden="true"
                 />
-                Applied on{" "}
-                {new Date(applications.createdAt).toLocaleDateString()}
+                Đăng vào {new Date(applications.createdAt).toLocaleDateString()}
               </div>
             </div>
           </div>

@@ -184,7 +184,7 @@ export default function Applications() {
                             ? "Đồng ý"
                             : data.applicationStatus === "Từ chối"
                             ? "Từ chối"
-                            : "Ưu tiên"
+                            : "Đang chờ"
                         }
                         color={
                           data.applicationStatus === "Đồng ý"

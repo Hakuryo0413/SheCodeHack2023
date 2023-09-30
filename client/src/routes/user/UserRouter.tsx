@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import UserLoginPage from "../../pages/user/UserLoginPage";
 import UserSignupPage from "../../pages/user/UserSignupPage";
-import UserHomePage from "../../pages/user/UserHomePage"; 
+import UserHomePage from "../../pages/user/UserHomePage";
 import UserProfilePage from "../../pages/user/UserProfilePage";
 import EditUserProfilePage from "../../pages/user/EditUserProfilePage";
 import CheckOut from "../../pages/user/CheckOut";
-
+import UserJobApplicationsPage from "../../pages/user/UserJobApplications";
 const UserRouter = () => {
   return (
     <div>
@@ -13,9 +13,10 @@ const UserRouter = () => {
         <Route path="/home" element={<UserHomePage />} />
         <Route path="/login" element={<UserLoginPage />} />
         <Route path="/register" element={<UserSignupPage />} />
-        <Route path="/profile" element={<UserProfilePage/>} />
-        <Route path="/edit-profile" element={<EditUserProfilePage/>}/> 
+        <Route path="/profile" element={<UserProfilePage />} />
+        <Route path="/edit-profile" element={<EditUserProfilePage />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/all-applications" element={<UserJobApplicationsPage />} />
       </Routes>
     </div>
   );
