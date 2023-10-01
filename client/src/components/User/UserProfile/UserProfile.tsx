@@ -148,6 +148,7 @@ function UserProfile() {
       setValue("email", userDetails?.email);
       setValue("gender", userDetails?.gender);
       setValue("birthday", userDetails?.birthday);
+      setValue("age",userDetails?.age);
       setValue("address", userDetails?.address);
       setValue("about", userDetails?.about);
       setValue("about", userDetails?.about);
@@ -156,26 +157,12 @@ function UserProfile() {
       setValue("resume", userDetails?.resume);
       setValue("education", userDetails?.education);
       
-      if (userDetails.page2q1) {
-        let yesBtn: HTMLElement | null = document.getElementById("page2q1-y");
-        if (yesBtn) {
-          yesBtn.ariaChecked = 'true';
-        }
-        
-      }
-      else {
-        let noBtn: HTMLElement | null = document.getElementById("page2q1-n");
-        if (noBtn) {
-          noBtn.ariaChecked = 'true';
-       }
-      }
+      setValue("page2q1", userDetails.page2q1);
       setValue("page2q2", userDetails.page2q2);
+      setValue("page2q3", userDetails.page2q3);
+      setValue("page2q4", userDetails.page2q4);
+      setValue("page2q5", userDetails.page2q5);
 
-      let page2q3: HTMLElement | null = document.getElementById("3");
-      if (page2q3) {
-        
-      
-      }
       
       setValue("page2q6", userDetails.page2q6);
       setValue("page2q7", userDetails.page2q7);
@@ -291,13 +278,13 @@ function UserProfile() {
               </div>
 
               <div className="flex flex-row space-x-[2%] my-[10px]">
-                <div className="flex flex-col space-y-2 w-[49%]">
+                <div className="flex flex-col space-y-2 w-[30%]">
                   <label className="font-bold" htmlFor="gender">
                     Giới tính
                   </label>
                   <select
                     id="gender"
-                    className="border border-gray-300 p-2 rounded-md focus:border-blue-500"
+                    className="border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
                     {...register("gender")}
                   >
                     <option value="" selected disabled hidden>
@@ -309,7 +296,7 @@ function UserProfile() {
                   </select>
                 </div>
 
-                <div className="flex flex-col space-y-2 w-[49%]">
+                <div className="flex flex-col space-y-2 w-[30%]">
                   <label className="font-bold" htmlFor="bthd">
                     Ngày sinh
                   </label>
@@ -318,6 +305,18 @@ function UserProfile() {
                     id="bthd"
                     className="border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
                     {...register("birthday")}
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-2 w-[20%]">
+                  <label className="font-bold" htmlFor="age">
+                    Tuổi
+                  </label>
+                  <input
+                    type="number"
+                    id="age"
+                    className="border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
+                    {...register("age")}
                   />
                 </div>
               </div>
@@ -375,13 +374,18 @@ function UserProfile() {
                 <label className="font-bold" htmlFor="edu">
                   Trình độ học vấn
                 </label>
-                <input
-                  type="text"
+                <select
                   id="edu"
                   placeholder="Trình độ học vấn"
                   className="border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
                   {...register("education")}
-                />
+                >
+                        <option value="Đại học">Đại học</option>
+                        <option value="Thạc sỹ">Thạc sỹ</option>
+                        <option value="Tiến sỹ">Tiến sỹ</option>
+                        <option value="Dưới đại học">Dưới đại học</option>
+                        <option value="Cử nhân">Cử nhân</option>
+                </select>
               </div>
             </div>
 
@@ -392,67 +396,38 @@ function UserProfile() {
               <div className="flex flex-row space-x-[2%] my-[10px]">
                 <div className="flex flex-col space-y-2 w-[49%]">
                   <label className="font-bold">
-                    Bạn đã có chuyên môn kỹ thuật chưa?
+                    Bạn muốn tham gia vào án trong vai trò gì?
                   </label>
-                  <div className="space-x-4">
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        className="form-radio text-blue-600"
-                        id="page2q1-y"
-                        value="true"
-                        {...register("page2q1")}
-                      />
-                      <span className="ml-2">Có</span>
-                    </label>
-
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        className="form-radio text-blue-600"
-                        id="page2q1-n"
-                        value="false"
-                        {...register("page2q1")}
-
-                      />
-                      <span className="ml-2">Không</span>
-                    </label>
-                  </div>
+                  <select
+                  id="page2q1"
+                  className="w-[90%] border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
+                  {...register("page2q1")}
+                  >
+                        <option value="" selected disabled hidden>Chọn câu trả lời</option>
+                        <option value="Kỹ thuật viên">Kỹ thuật viên</option>
+                        <option value="Thiết kế">Thiết kế</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Manager">Manager</option>
+                  </select>
                 </div>
 
                 <div className="flex flex-col space-y-2 w-[49%]">
                   <label className="font-bold">
-                    Bạn đã từng tham gia vào dự án startup chưa?
+                    Bạn đã có kinh nghiệm tại vị trí này?
                   </label>
-                  <div className="space-x-4">
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        className="form-radio text-blue-600"
-                        id="page2q2-y"
-                        value="true"
-                        {...register("page2q2")}
-                      />
-                      <span className="ml-2">Có</span>
-                    </label>
-
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        className="form-radio text-blue-600"
-                        id='page2q2-n'
-                        value="false"
-                        {...register("page2q2")}
-                      />
-                      <span className="ml-2">Không</span>
-                    </label>
-                  </div>
+                  <input
+                  id="page2q2"
+                  type="number"
+                  placeholder="Năm"
+                  className="w-[90%] border border-gray-300 p-2 rounded-md focus:border-blue-500 focus:outline-none"
+                  {...register("page2q2")}
+                  />
                 </div>
               </div>
 
               <div className="flex flex-col space-y-2 my-[10px]">
                 <label className="font-bold" htmlFor="page2q3">
-                  Bạn dự định làm việc full-time tại startup vào lúc nào?
+                  bạn đã từng tham gia vào dự án start-up chưa?
                 </label>
                 <select
                   id="page2q3"
@@ -462,19 +437,19 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value="always-full-time" id="always-full-time">
-                    Tôi có thể làm full-time luôn khi tìm được co-founder?
+                  <option value="Không">
+                    Tôi chưa từng tham gia vào dự án start-up nào
                   </option>
-                  <option value="next-year-full-time" id='next-year-full-time'>
-                    Tôi dự tính bắt đầu làm full time từ năm sau
+                  <option value="Có">
+                    Tôi đã từng tham gia vào dự án start-up
                   </option>
-                  <option value="no-decision" id='no-decision'>Tôi vẫn chưa có kế hoạch cụ thể</option>
+                  
                 </select>
               </div>
 
               <div className="flex flex-col space-y-2 my-[10px]">
                 <label className="font-bold" htmlFor="gender">
-                  Bạn tham gia vào lĩnh vực nào của dự án startup?
+                  Bạn muốn tham gia vào dự án với chủ đề nào?
                 </label>
                 <select
                   id="page2q4"
@@ -484,16 +459,16 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value="engineer">Kĩ sư lập trình</option>
-                  <option value="designer">Thiết kế</option>
-                  <option value="sale">Sale và marketing</option>
-                  <option value="other">Khác</option>
+                      <option value="Môi trường">Môi trường</option>
+                      <option value="Kinh tế">Kinh tế</option>
+                      <option value="Y tế">Y tế</option>
+                      <option value="Công nghệ">Công nghệ</option>
                 </select>
               </div>
 
               <div className="flex flex-col space-y-2 my-[10px]">
                 <label className="font-bold" htmlFor="gender">
-                  Bạn có hứng thú với chủ đề startup nào?
+                  Bạn muốn tham gia start-up sử dụng ngôn ngữ?
                 </label>
                 <select
                   id="page2q5"
@@ -503,9 +478,11 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
+                      <option value="Anh">Anh</option>
+                      <option value="Việt">Việt</option>
+                      <option value="Trung">Trung</option>
+                      <option value="Nhật">Nhật</option>
+                      <option value="Khác">Khác</option>
                 </select>
               </div>
 
@@ -576,7 +553,7 @@ function UserProfile() {
 
               <div className="flex flex-col space-y-2 my-[10px]">
                 <label className="font-bold" htmlFor="gender">
-                  Bạn đang tìm kiếm một co-founder như thế nào?
+                  Hình thức làm việc với co-founder mà bạn muốn?
                 </label>
                 <select
                   id="page3q2"
@@ -586,8 +563,9 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value="have-ideal">Co-founder đã có ý tưởng</option>
-                  <option value="no-ideal">Co-founder chưa có ý tưởng cụ thể</option>
+                      <option value="Online">Online</option>
+                      <option value="Offline">Offline</option>
+                      <option value="Cả hai">Cả hai</option>
                 </select>
               </div>
 
@@ -604,13 +582,11 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value="same-sche">
-                    Thời gian làm việc khớp với thời gian biểu của tôi
-                  </option>
-                  <option value="diff-sche">
-                    Không bắt buộc phải có thời gian làm việc khớp với thời gian
-                    biểu của tôi
-                  </option>
+                      <option value="Cả ngày">Cả ngày</option>
+                      <option value="Sáng">Sáng</option>
+                      <option value="Trưa">Trưa</option>
+                      <option value="Chiều">Chiều</option>
+                      <option value="Tối">Tối</option>
                 </select>
               </div>
 
@@ -626,9 +602,70 @@ function UserProfile() {
                   <option value="" selected disabled hidden>
                     Lựa chọn câu trả lời
                   </option>
-                  <option value="nearest">Gần nơi ở của tôi</option>
-                  <option value="city">Trong thành phố của tôi</option>
-                  <option value="country">Trong đất nước của tôi</option>
+                      <option value="An Giang">An Giang</option>
+                      <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                      <option value="Bạc Liêu">Bạc Liêu</option>
+                      <option value="Bắc Kạn">Bắc Kạn</option>
+                      <option value="Bắc Giang">Bắc Giang</option>
+                      <option value="Bắc Ninh">Bắc Ninh</option>
+                      <option value="Bến Tre">Bến Tre</option>
+                      <option value="Bình Dương">Bình Dương</option>
+                      <option value="Bình Định">Bình Định</option>
+                      <option value="Bình Phước">Bình Phước</option>
+                      <option value="Bình Thuận">Bình Thuận</option>
+                      <option value="Cà Mau">Cà Mau</option>
+                      <option value="Cao Bằng">Cao Bằng</option>
+                      <option value="Đắk Lắk">Đắk Lắk</option>
+                      <option value="Đắk Nông">Đắk Nông</option>
+                      <option value="Điện Biên">Điện Biên</option>
+                      <option value="Đồng Nai">Đồng Nai</option>
+                      <option value="Đồng Tháp">Đồng Tháp</option>
+                      <option value="Gia Lai">Gia Lai</option>
+                      <option value="Hà Giang">Hà Giang</option>
+                      <option value="Hà Nam">Hà Nam</option>
+                      <option value="Hà Nội (Thủ đô)">Hà Nội (Thủ đô)</option>
+                      <option value="Hà Tĩnh">Hà Tĩnh</option>
+                      <option value="Hải Dương">Hải Dương</option>
+                      <option value="Hải Phòng">Hải Phòng</option>
+                      <option value="Hậu Giang">Hậu Giang</option>
+                      <option value="Hòa Bình">Hòa Bình</option>
+                      <option value="Hưng Yên">Hưng Yên</option>
+                      <option value="Khánh Hòa">Khánh Hòa</option>
+                      <option value="Kiên Giang">Kiên Giang</option>
+                      <option value="Kon Tum">Kon Tum</option>
+                      <option value="Lai Châu">Lai Châu</option>
+                      <option value="Lâm Đồng">Lâm Đồng</option>
+                      <option value="Lạng Sơn">Lạng Sơn</option>
+                      <option value="Lào Cai">Lào Cai</option>
+                      <option value="Long An">Long An</option>
+                      <option value="Nam Định">Nam Định</option>
+                      <option value="Nghệ An">Nghệ An</option>
+                      <option value="Ninh Bình">Ninh Bình</option>
+                      <option value="Ninh Thuận">Ninh Thuận</option>
+                      <option value="Phú Thọ">Phú Thọ</option>
+                      <option value="Phú Yên">Phú Yên</option>
+                      <option value="Quảng Bình">Quảng Bình</option>
+                      <option value="Quảng Nam">Quảng Nam</option>
+                      <option value="Quảng Ngãi">Quảng Ngãi</option>
+                      <option value="Quảng Ninh">Quảng Ninh</option>
+                      <option value="Quảng Trị">Quảng Trị</option>
+                      <option value="Sóc Trăng">Sóc Trăng</option>
+                      <option value="Sơn La">Sơn La</option>
+                      <option value="Tây Ninh">Tây Ninh</option>
+                      <option value="Thái Bình">Thái Bình</option>
+                      <option value="Thái Nguyên">Thái Nguyên</option>
+                      <option value="Thanh Hóa">Thanh Hóa</option>
+                      <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>
+                      <option value="Tiền Giang">Tiền Giang</option>
+                      <option value="Trà Vinh">Trà Vinh</option>
+                      <option value="Tuyên Quang">Tuyên Quang</option>
+                      <option value="Vĩnh Long">Vĩnh Long</option>
+                      <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                      <option value="Yên Bái">Yên Bái</option>
+                      <option value="Phú Quốc (Tỉnh Kiên Giang)">Phú Quốc (Tỉnh Kiên Giang)</option>
+                      <option value="Bạc Liêu (Thành phố)">Bạc Liêu (Thành phố)</option>
+                      <option value="Cần Thơ (Thành phố)">Cần Thơ (Thành phố)</option>
+                      <option value="nước ngoài">nước ngoài</option>
                 </select>
               </div>
             </div>

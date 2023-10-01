@@ -22,6 +22,9 @@ const userSchema = new Schema({
     birthday: {
         type: Date
     }, 
+    age: {
+        type: Number
+    },
     address: {
         type: String
     },
@@ -44,10 +47,10 @@ const userSchema = new Schema({
         type: String
     },
     page2q1: {
-        type: Boolean
+        type: String
     },
     page2q2: {
-        type: Boolean
+        type: String
     },
     page2q3: {
         type: String
@@ -72,10 +75,10 @@ const userSchema = new Schema({
     },
 
     page3q1: {
-        type: Boolean
+        type: String
     },
     page3q2: {
-        type: Boolean
+        type: String
     },
     page3q3: {
         type: String
