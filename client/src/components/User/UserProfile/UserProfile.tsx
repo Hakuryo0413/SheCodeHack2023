@@ -198,7 +198,7 @@ function UserProfile() {
       .then(() => {
         notify("Data updated successfully", "success");
         setTimeout(() => {
-          navigate("/job/all-jobs");
+          navigate("/user/home");
         }, 2000);
       })
       .catch((error: any) => {
