@@ -14,11 +14,7 @@ export const NavRoutes = [
   {
     layout: "admin",
     pages: [
-      {
-        icon: <FaChartBar {...icon} />,
-        name: "dashboard",
-        path: "/cofounder/dashboard",
-      },
+     
       {
         icon: <FaBriefcase {...icon} />,
         name: "Dự án",
