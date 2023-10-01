@@ -196,8 +196,10 @@ function UserProfile() {
     const num = formData.image.length.toString();
     updateUser(updatedFormData)
       .then(() => {
-        notify(num, "success");
         notify("Data updated successfully", "success");
+        setTimeout(() => {
+          navigate("/user/home");
+        }, 2000);
       })
       .catch((error: any) => {
         if (typeof formData.image == "object") {

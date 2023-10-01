@@ -155,8 +155,8 @@ function DisplayJobs(this: any) {
             <div className="sm:col-span-1">
               <select
                 className="focus:ring-2 focus:ring-purple-600 border-2 rounded-lg py-2 px-4 text-gray-500"
-                value={selectedTopic}
-                onChange={(e) => setSelectedTopic(e.target.value)}
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
               >
                 <option value="">Chọn chủ đề</option>
                 {topics.map((topic) => (
