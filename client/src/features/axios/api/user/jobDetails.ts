@@ -45,10 +45,8 @@ export const distinct = async (field: string, setter: any): Promise<any> => {
 
 export const filterJobs = async (
   topic: string,
-  //workingTime: string,
   location: string,
   role: string,
-  //salary: any
 ): Promise<any> => {
   try {
     const config: AxiosRequestConfig = {
@@ -56,10 +54,8 @@ export const filterJobs = async (
       method: "post",
       data: {
         topic,
-        //workingTime,
         location,
         role,
-        // salary
       },
     };
     const response = await api(config);
