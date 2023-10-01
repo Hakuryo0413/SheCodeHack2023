@@ -71,6 +71,7 @@ function DisplayJobs(this: any) {
   useEffect(() => {
     let filterJob = jobs?.filter(
       (job: JobsInterface) =>
+        job?.title?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
         job?.topic?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
         job?.location?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
         job?.role?.toLowerCase().includes(searchQuery?.toLowerCase())
@@ -172,8 +173,8 @@ function DisplayJobs(this: any) {
             <div className="sm:col-span-1">
               <select
                 className="focus:ring-2 focus:ring-purple-600 border-2 rounded-lg py-2 px-4 text-gray-500"
-                value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
+                value={selectedTopic}
+                onChange={(e) => setSelectedTopic(e.target.value)}
               >
                 <option value="">Chọn địa điểm</option>
                 {locations.map((location) => (
